@@ -16,11 +16,13 @@ public class CustomErrorController implements ErrorController {
     public String handleError(HttpServletRequest request, Model model) {
         String status = String.valueOf(request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE));
         String errorMessage = String.valueOf(request.getAttribute(RequestDispatcher.ERROR_MESSAGE));
-        int statusCode = status!=null?Integer.valueOf(status):500;
-        errorMessage = errorMessage.isEmpty()?"Error Occurred":errorMessage;
-        model.addAttribute("code",statusCode);
-        model.addAttribute("message",errorMessage);
-        return "error/error_page";
+//        int statusCode = status!=null?Integer.valueOf(status):500;
+        errorMessage = errorMessage.isEmpty()?"Page Not Found":errorMessage;
+
+        String displayMessage = "Error "+status+" : "+errorMessage;
+//        model.addAttribute("code",statusCode);
+        model.addAttribute("message",displayMessage);
+        return "error/error_page_new";
     }
 
     @Override
